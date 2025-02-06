@@ -91,14 +91,17 @@ interface Block {
 const CHANGELOG_LINE = /^\s*•/;
 type Messages = [Block[], ...Array<Block[] | FileUpload>];
 
-/** Split a long spring into chunks by character limit */
-const splitCharacterLimit = (line: string, charLimit: number) => {
+/** Split a long string into chunks by character limit */
+const splitCharacterLimitAtNewline = (line: string, charLimit: number) => {
   const splitLines = [];
   let buffer = line;
 
   while (buffer) {
-    splitLines.push(buffer.slice(0, charLimit));
-    buffer = buffer.slice(charLimit);
+    // get the \n closest to the char limit
+    const newlineIndex = buffer.indexOf("\n", charLimit);
+    const endOfLine = newlineIndex >= 0 ? newlineIndex : charLimit;
+    splitLines.push(buffer.slice(0, endOfLine));
+    buffer = buffer.slice(endOfLine);
   }
 
   return splitLines;
@@ -171,11 +174,11 @@ export function convertToBlocks(
 
       const fullSection = lines.join("\n");
 
-      if (line.length > 3000) {
-        const splitLines = splitCharacterLimit(line, 3000);
+      if (fullSection.length > 3000) {
+        const splitLines = splitCharacterLimitAtNewline(fullSection, 3000);
 
         splitLines.forEach((splitLine) => {
-            currentMessage.push(createSectionBlock(splitLine));
+          currentMessage.push(createSectionBlock(splitLine));
         });
       } else {
         currentMessage.push(createSectionBlock(fullSection));
@@ -183,10 +186,10 @@ export function convertToBlocks(
 
       currentMessage.push(createSpacerBlock());
     } else if (line.length > 3000) {
-      const splitLines = splitCharacterLimit(line, 3000);
+      const splitLines = splitCharacterLimitAtNewline(line, 3000);
 
       splitLines.forEach((splitLine) => {
-          currentMessage.push(createSectionBlock(splitLine));
+        currentMessage.push(createSectionBlock(splitLine));
       });
     } else if (line) {
       currentMessage.push(createSectionBlock(line));
@@ -202,7 +205,7 @@ const basePluginOptions = t.partial({
   /** URL of the slack to post to */
   url: t.string,
   /** Who to bother when posting to the channel */
-  atTarget: t.string,
+  atTarget: t.union([t.string, t.boolean]),
   /** Allow users to opt into having prereleases posted to slack */
   publishPreRelease: t.boolean,
   /** Additional Title to add at the start of the slack message */
@@ -215,6 +218,14 @@ const basePluginOptions = t.partial({
   iconEmoji: t.string,
 });
 
+const urlPluginOptions = t.intersection([
+  t.partial({
+    /** Channels to post */
+    channel: t.string,
+  }),
+  basePluginOptions,
+]);
+
 const appPluginOptions = t.intersection([
   t.interface({
     /** Marks we are gonna use app auth */
@@ -225,7 +236,7 @@ const appPluginOptions = t.intersection([
   basePluginOptions,
 ]);
 
-const pluginOptions = t.union([basePluginOptions, appPluginOptions]);
+const pluginOptions = t.union([urlPluginOptions, appPluginOptions]);
 
 export type ISlackPluginOptions = t.TypeOf<typeof pluginOptions>;
 
@@ -245,7 +256,7 @@ export default class SlackPlugin implements IPlugin {
       this.options = {
         ...options,
         url: process.env.SLACK_WEBHOOK_URL || options.url || "",
-        atTarget: options.atTarget ? options.atTarget : "channel",
+        atTarget: options.atTarget ?? "channel",
         publishPreRelease: options.publishPreRelease
           ? options.publishPreRelease
           : false,
@@ -371,10 +382,12 @@ export default class SlackPlugin implements IPlugin {
         ? urls.join(", ")
         : `${url(releases[0].data.html_url, "View Release")}`;
 
+    const atTargetTxt = this.options.atTarget
+      ? `@${this.options.atTarget} ${releaseUrl}`
+      : `${releaseUrl}`;
+
     // First add context to share link to release
-    messages[0].unshift(
-      createContextBlock(`@${this.options.atTarget} ${releaseUrl}`)
-    );
+    messages[0].unshift(createContextBlock(atTargetTxt));
     // At text only header
     messages[0].unshift(createHeaderBlock(header));
 
@@ -448,6 +461,7 @@ export default class SlackPlugin implements IPlugin {
           link_names: true,
           // If not in app auth only one message is constructed
           blocks: messages[0],
+          channel: this.options.channel,
         }),
         headers: { "Content-Type": "application/json" },
         agent,

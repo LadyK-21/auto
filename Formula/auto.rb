@@ -1,9 +1,9 @@
 class Auto < Formula
   desc "Generate releases based on semantic version labels on pull requests."
   homepage "https://intuit.github.io/auto"
-  url "https://github.com/intuit/auto/releases/download/v10.37.1/auto-macos.gz"
-  version "v10.37.1"
-  sha256 "7e4a0ddd6313288b148a8ab43b17fb640845f08dc6a91d0048bf5108b1d43a1e"
+  url "https://github.com/intuit/auto/releases/download/v11.3.0/auto-macos.gz"
+  version "v11.3.0"
+  sha256 "c7527afe74d8469b3c52fb2c753cec7dbed5d9a7618fa9231697af0d76c00a77"
 
   def install
     libexec.install Dir["*"]

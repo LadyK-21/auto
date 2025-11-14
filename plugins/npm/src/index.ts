@@ -41,10 +41,8 @@ const { isCi } = envCi();
 async function getPublishedVersion(name: string) {
   try {
     return await Promise.race([
-      new Promise<void>((_, reject) => {
-        setTimeout(() => {
-          reject(new Error("Timeout"));
-        }, 30_000);
+      new Promise<undefined>((resolve) => {
+        setTimeout(resolve, 30_000);
       }),
       // This timeout is very very long (5+ minutes)
       execPromise("npm", [

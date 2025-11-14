@@ -55,7 +55,11 @@ async function getPublishedVersion(name: string) {
         await getRegistry(),
       ]),
     ]);
-  } catch (error) {}
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("Timeout")) {
+      console.error("Timeout getting published version for", name);
+    }
+  }
 }
 
 /**

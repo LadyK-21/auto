@@ -1,3 +1,20 @@
+# v11.3.5 (Fri Nov 14 2025)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, Kevin Ross ([@rosskevin](https://github.com/rosskevin)), for all your work!
+
+#### 🐛 Bug Fix
+
+- `@auto-it/npm`
+  - Fix inspection of lerna settings #2488 [#2490](https://github.com/intuit/auto/pull/2490) ([@rosskevin](https://github.com/rosskevin))
+
+#### Authors: 1
+
+- Kevin Ross ([@rosskevin](https://github.com/rosskevin))
+
+---
+
 # v11.3.4 (Fri Nov 14 2025)
 
 :tada: This release contains work from a new contributor! :tada:

@@ -1,3 +1,19 @@
+# v11.3.4 (Fri Nov 14 2025)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, Nayan Gupta ([@nayanmanojgupta](https://github.com/nayanmanojgupta)), for all your work!
+
+#### 🐛 Bug Fix
+
+- use atomic git push [#2496](https://github.com/intuit/auto/pull/2496) (nayan_gupta@intuit.com)
+
+#### Authors: 1
+
+- Nayan Gupta ([@nayanmanojgupta](https://github.com/nayanmanojgupta))
+
+---
+
 # v11.3.3 (Fri Nov 14 2025)
 
 #### 🐛 Bug Fix

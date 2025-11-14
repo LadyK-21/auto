@@ -40,12 +40,20 @@ const { isCi } = envCi();
 /** Get the last published version for a npm package */
 async function getPublishedVersion(name: string) {
   try {
-    return await execPromise("npm", [
-      "view",
-      name,
-      "version",
-      "--registry",
-      await getRegistry(),
+    return await Promise.race([
+      new Promise((_, reject) => {
+        setTimeout(() => {
+          reject(new Error("Timeout"));
+        }, 30_000);
+      }),
+      // This timeout is very very long (5+ minutes)
+      execPromise("npm", [
+        "view",
+        name,
+        "version",
+        "--registry",
+        await getRegistry(),
+      ]),
     ]);
   } catch (error) {}
 }

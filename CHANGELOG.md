@@ -1,3 +1,26 @@
+# v11.3.1 (Fri Nov 14 2025)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, Simeon Cheeseman ([@SimeonC](https://github.com/SimeonC)), for all your work!
+
+#### 🐛 Bug Fix
+
+- `@auto-it/jira`
+  - 🐛 correctly parse multiple jira issues links in a message [#2505](https://github.com/intuit/auto/pull/2505) ([@SimeonC](https://github.com/SimeonC))
+
+#### 🏠 Internal
+
+- `@auto-it/cocoapods`
+  - Update some test refs [#2489](https://github.com/intuit/auto/pull/2489) ([@adierkens](https://github.com/adierkens))
+
+#### Authors: 2
+
+- Adam Dierkens ([@adierkens](https://github.com/adierkens))
+- Simeon Cheeseman ([@SimeonC](https://github.com/SimeonC))
+
+---
+
 # v11.3.0 (Fri Oct 25 2024)
 
 #### 🚀 Enhancement

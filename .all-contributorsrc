@@ -918,6 +918,17 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "nayanmanojgupta",
+      "name": "Nayan Gupta",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61581273?v=4",
+      "profile": "https://github.com/nayanmanojgupta",
+      "contributions": [
+        "doc",
+        "test",
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

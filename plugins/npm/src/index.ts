@@ -41,7 +41,7 @@ const { isCi } = envCi();
 async function getPublishedVersion(name: string) {
   try {
     return await Promise.race([
-      new Promise((_, reject) => {
+      new Promise<void>((_, reject) => {
         setTimeout(() => {
           reject(new Error("Timeout"));
         }, 30_000);

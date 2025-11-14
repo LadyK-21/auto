@@ -1,3 +1,23 @@
+# v11.3.6 (Fri Nov 14 2025)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, Andrew Lisowski ([@sfc-gh-alisowski](https://github.com/sfc-gh-alisowski)), for all your work!
+
+#### 🐛 Bug Fix
+
+- add timeout to npm view [#2513](https://github.com/intuit/auto/pull/2513) ([@sfc-gh-alisowski](https://github.com/sfc-gh-alisowski))
+- dont reject ([@sfc-gh-alisowski](https://github.com/sfc-gh-alisowski))
+- add message ([@sfc-gh-alisowski](https://github.com/sfc-gh-alisowski))
+- fix build ([@sfc-gh-alisowski](https://github.com/sfc-gh-alisowski))
+- add timeout to npm view ([@sfc-gh-alisowski](https://github.com/sfc-gh-alisowski))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@sfc-gh-alisowski](https://github.com/sfc-gh-alisowski))
+
+---
+
 # v11.3.5 (Fri Nov 14 2025)
 
 :tada: This release contains work from a new contributor! :tada:

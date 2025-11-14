@@ -929,6 +929,17 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "rosskevin",
+      "name": "Kevin Ross",
+      "avatar_url": "https://avatars.githubusercontent.com/u/136564?v=4",
+      "profile": "https://alienfast.com/",
+      "contributions": [
+        "doc",
+        "test",
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

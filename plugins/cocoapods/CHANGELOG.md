@@ -1,3 +1,19 @@
+# v11.3.1 (Fri Nov 14 2025)
+
+#### 🐛 Bug Fix
+
+- Update test refs in cocoapods ([@adierkens](https://github.com/adierkens))
+
+#### 🏠 Internal
+
+- Update some test refs [#2489](https://github.com/intuit/auto/pull/2489) ([@adierkens](https://github.com/adierkens))
+
+#### Authors: 1
+
+- Adam Dierkens ([@adierkens](https://github.com/adierkens))
+
+---
+
 # v11.1.0 (Fri Feb 23 2024)
 
 #### 🚀 Enhancement

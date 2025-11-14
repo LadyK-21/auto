@@ -940,6 +940,17 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "sfc-gh-alisowski",
+      "name": "Andrew Lisowski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/196691327?v=4",
+      "profile": "https://github.com/sfc-gh-alisowski",
+      "contributions": [
+        "doc",
+        "test",
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

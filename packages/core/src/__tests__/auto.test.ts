@@ -1559,6 +1559,36 @@ describe("Auto", () => {
       expect(afterShipIt).toHaveBeenCalled();
     });
 
+    test("should not graduate with an empty release when onlyGraduateWithReleaseLabel is set", async () => {
+      const auto = new Auto({ ...defaults, plugins: [] });
+      // @ts-ignore
+      auto.checkClean = () => Promise.resolve(true);
+      auto.logger = dummyLog();
+      await auto.loadConfig();
+      auto.remote = "https://github.com/intuit/auto";
+
+      auto.git!.getLatestRelease = () => Promise.resolve("1.2.3");
+      // No commits in the release => head is empty
+      auto.release!.getCommitsInRelease = () => Promise.resolve([]);
+
+      // Stub the release-type handlers so the graduation check is the only
+      // thing under test (and we don't hit process.exit in the next path).
+      const latest = jest
+        .spyOn(auto, "latest")
+        .mockImplementation(() => Promise.resolve(undefined));
+      jest.spyOn(auto, "next").mockImplementation(() => Promise.resolve(undefined));
+      jest
+        .spyOn(auto, "canary")
+        .mockImplementation(() => Promise.resolve(undefined));
+
+      // Previously threw on `head[0].labels` when the release was empty.
+      // With no release label present, an empty release must not graduate.
+      await expect(
+        auto.shipit({ onlyGraduateWithReleaseLabel: true })
+      ).resolves.toBeUndefined();
+      expect(latest).not.toHaveBeenCalled();
+    });
+
     test("should not create changelog with noChangelog", async () => {
       const auto = new Auto({ ...defaults, plugins: [] });
       // @ts-ignore

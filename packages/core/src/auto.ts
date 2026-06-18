@@ -1624,6 +1624,7 @@ export default class Auto {
     const shouldGraduate =
       !options.onlyGraduateWithReleaseLabel ||
       (options.onlyGraduateWithReleaseLabel &&
+        head.length > 0 &&
         head[0].labels.some((l) =>
           this.semVerLabels?.get("release")?.includes(l)
         ));
